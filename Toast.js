@@ -1,23 +1,55 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import reactDom from 'react-dom';
-import './toast.css';
+import { useState } from 'react';
+import styles from './toast.css';
+import {  Progress } from 'reactstrap';
 
 
 
 const Toastmessage =(props) =>{
-    // const width=props.width?`${props.width}px`:'40px';
-    // const height=props.height?`${props.height}px`:'20px';
-    // const radius=props.radius?`${props.radius}px`:'10px';
+    
+    
+    const[message,setMessage]=useState([]);
+    
+
+    const showtoast=() =>{
+        let toastmessage="success the event";
+          setMessage([toastmessage])
+        
+        }
+            const deletetoast=useCallback(id =>{
+                const deletetoastitem=message.filter((e) =>e.id !==id);
+                setMessage(deletetoastitem)
+            })
+    
+    useEffect(() =>{
+        const interval=setInterval(() =>{
+            if(message){
+                deletetoast(message.id);
+            }
+            
+        },`${props.closetime}`)
+        return (() =>{
+            clearInterval(interval)
+        })
+    },[showtoast,deletetoast])
     return(
+        <div className=" text-center">
+            <h1>toast message</h1>
         <div>
-            <h1>hello</h1>
+          <button onClick={showtoast}>success</button>
+          
+          </div>
                 {
-                    props.toastlist.map((toast,i) =>(
-                    <div key={i} >
-                        <div className="style" >
-                            <button>X</button>
-                            
-                            <p>{toast.title}--{toast.body}</p>
+                message.map((toast,index) =>(
+                    <div key={index} >
+                        
+                        <div className="box" style={{backgroundColor:`${props.color}`}}>
+                            <button onClick={() =>deletetoast(toast.id)}>X</button>
+                            {toast}
+                        <div className="progress">
+
+                        </div>
                             
                         </div>                        
                     </div>
