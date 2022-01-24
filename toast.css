@@ -1,41 +1,46 @@
- .style{
-     bottom: 1rem;
-     right: 1rem;
-     background-color: green;
+ .box{
+    right:1rem;
+    bottom:1rem;
      color: white;
      width: 200px;
      height: 50px;
      border-radius: 10px;
      position:absolute;
      padding: 10px;
-     opacity: 0.9;
+     opacity: 0.6;
      box-shadow: 0 0 10px rgb(108, 236, 82);
      transition: 2s ease;
+     animation: loading 1.5s ;
+     
     
     
  }
- .style button{
+ .box button{
      float:right;
      background: none;
      border: none;
      color:white;
-     opacity: 0.9;
-     cursor: pointer;
-     animation: toast-in-right 2.0s;
+
      
  }
- .style :hover{
+.box progress{
+  padding-right: 10px;
+  font-size: 1rem;
+  float: bottom;
+}
+ .box :hover{
     box-shadow: 0 0 5px rgb(176, 223, 153);
     opacity: 1;
-    
-
  }
- @keyframes toast-in-right{
-     from{
-         transform:traslateX(10%);
-        }
-     to{
-        transform:translatex(0);
-    }
+
+
+     
+ @keyframes loading{
+    0% {
+        transform: translateX(0px);
+      }
+      100% {
+        transform: translateX(300px);
+      }
 
  }
